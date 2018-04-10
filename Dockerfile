@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 
 LABEL maintainer="David Cardozo <david@kiwicampus.com>"
+ENV TF_VERSION 1.7
 
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -80,6 +81,7 @@ RUN git clone https://github.com/opencv/opencv.git \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /opt/opencv*
 
+RUN /opt/anaconda/bin/pip tensorflow
 WORKDIR /data
 EXPOSE 8888
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
